@@ -1,0 +1,188 @@
+const express = require('express');
+const router = express.Router();
+
+const { postEvaluate } = require('../controllers/evaluationController');
+
+const fs = require('fs');
+const path = require('path');
+const PDFDocument = require('pdfkit');
+
+/**
+ * Helper to flatten categories from result.details
+ */
+function getCategoryTextFromResult(result, categoryName) {
+  const cat = result.details?.[categoryName];
+  if (!cat) return null;
+
+  const parts = [];
+  if (cat._value) parts.push(String(cat._value));
+
+  const subKeys = Object.keys(cat).filter((k) => k !== '_value');
+  for (const key of subKeys) {
+    const text = cat[key];
+    if (text) parts.push(`${key}: ${text}`);
+  }
+
+  return parts.length ? parts.join(' ') : null;
+}
+
+/**
+ * POST /api/evaluate
+ */
+router.post('/', postEvaluate);
+
+/**
+ * POST /api/evaluate/export-pdf
+ * Body: { country, input, result }
+ */
+router.post('/export-pdf', (req, res) => {
+  const { country, input, result } = req.body || {};
+
+  if (!country || !input || !result) {
+    return res.status(400).json({ message: 'Missing assessment data.' });
+  }
+
+  try {
+    const doc = new PDFDocument({ margin: 45 });
+
+    const countryName = country.name || country.code || 'assignment';
+    const safeFilename = countryName.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+    const filename = `hydac-assessment-${safeFilename}.pdf`;
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${filename}"`
+    );
+
+    doc.pipe(res);
+
+    // Add HYDAC logo
+    try {
+      const logoPath = path.join(__dirname, '../../assets/hydac-logo.png');
+      if (fs.existsSync(logoPath)) {
+        doc.image(logoPath, 45, 40, { width: 110 });
+        doc.moveDown(3);
+      } else {
+        doc.moveDown(1.5);
+      }
+    } catch (err) {
+      doc.moveDown(1.5);
+    }
+
+    // Heading
+    doc
+      .fontSize(20)
+      .fillColor('#000')
+      .text('HYDAC Work Assignment Checker', { align: 'left' });
+
+    doc
+      .fontSize(11)
+      .fillColor('#444')
+      .text('EU employment notification support tool', { align: 'left' });
+
+    doc.moveDown(1);
+
+    // Timestamp
+    const now = new Date().toLocaleString();
+    doc.fontSize(10).fillColor('#666').text(`Exported: ${now}`);
+
+    doc.moveDown(1.2);
+
+    // Section Title
+    doc.fontSize(15).fillColor('#000').text('Basic information');
+    doc.moveDown(0.4);
+
+    const addRow = (label, value) => {
+      doc
+        .fontSize(11)
+        .fillColor('#333')
+        .text(`${label}: `, { continued: true })
+        .font('Helvetica-Bold')
+        .text(value || '-');
+      doc.font('Helvetica');
+    };
+
+    addRow('Country', countryName);
+    addRow('Activity type', input.activityType);
+    addRow('Duration', `${input.durationDays} day(s)`);
+    addRow('Traveller role', input.travellerRole);
+    addRow('Mobile work only', input.isMobileOnly ? 'Yes' : 'No');
+
+    doc.moveDown(1.2);
+
+    // Decision section
+    doc.fontSize(15).fillColor('#000').text('Decision');
+    doc.moveDown(0.4);
+
+    const ruleExplanation =
+      result.ruleExplanation ||
+      'No detailed explanation provided by the matrix logic.';
+
+    doc.fontSize(11).fillColor('#333').text(ruleExplanation);
+    doc.moveDown(0.8);
+
+    addRow('Requires notification', String(result.requiresNotification));
+
+    // Matrix category extracts
+    const notificationForm = getCategoryTextFromResult(
+      result,
+      'Form der Abgabe der Meldung'
+    );
+    const notificationDeadline = getCategoryTextFromResult(
+      result,
+      'Frist der Meldung'
+    );
+    const localRepInfo = getCategoryTextFromResult(
+      result,
+      'Lokaler Ansprechpartner'
+    );
+    const documentsSummary = getCategoryTextFromResult(
+      result,
+      'Mitzuführende Dokumente'
+    );
+    const postStaySummary = getCategoryTextFromResult(
+      result,
+      'Pflichten nach Aufenthalt für den entsendenden AG'
+    );
+    const sanctionsSummary = getCategoryTextFromResult(
+      result,
+      'Sanktionen'
+    );
+
+    addRow('Authority / form', notificationForm || 'Not specified in matrix');
+    addRow('Deadline for notification', notificationDeadline || 'Not specified in matrix');
+    addRow('Local representative', localRepInfo || 'Not specified in matrix');
+
+    // Optional sections
+    const addBlock = (title, content) => {
+      if (!content) return;
+
+      doc.moveDown(1);
+      doc.fontSize(13).fillColor('#000').text(title);
+      doc.moveDown(0.2);
+      doc.fontSize(11).fillColor('#333').text(content);
+    };
+
+    addBlock('Documents to carry', documentsSummary);
+    addBlock('Post-stay obligations', postStaySummary);
+    addBlock('Sanctions', sanctionsSummary);
+
+    // Disclaimer
+    doc.moveDown(1.2);
+    doc
+      .fontSize(9)
+      .fillColor('#666')
+      .text(
+        'This PDF was generated by the internal HYDAC Work Assignment Checker. It provides guidance only and does not replace legal advice. In case of doubt, consult Corporate HR/Legal.',
+        { align: 'left' }
+      );
+
+    doc.end();
+  } catch (err) {
+    console.error('PDF export failed', err);
+    return res.status(500).json({ message: 'Failed to generate PDF.' });
+  }
+});
+
+module.exports = router;

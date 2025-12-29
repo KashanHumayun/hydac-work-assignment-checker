@@ -1,0 +1,74 @@
+{
+  "app": {
+    "title": "HYDAC Work Assignment Checker",
+    "subtitle": "EU employment notification support tool",
+    "newAssessment": "New assessment",
+    "footer": "© 2025 HYDAC HR System. All rights reserved."
+
+  },
+  "lang": {
+    "switchTo": "DE",
+    "title": "Switch to German",
+    "aria": "Switch language to German"
+  },
+  "newAssessment": {
+    "title": "New work assignment assessment",
+    "intro": "Enter the basic details of the planned assignment. The system will check the country matrix and indicate whether a notification is required.",
+    "country": "Country of work",
+    "selectCountry": "Select country",
+    "activity": "Type of activity",
+    "activityHint": "Select the option that best matches the main purpose of the trip.",
+    "travellerRole": "Traveller role",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "durationHint": "Duration is calculated automatically from the dates.",
+    "mobileOnly": "100% mobile work (no on-site presence at customer or HYDAC site)",
+    "mobileHint": "If checked, the system will apply any special rules for pure mobile work from the matrix.",
+    "durationCalculated": "Calculated duration: {{days}} day(s)",
+    "evaluate": "Evaluate assignment",
+    "evaluating": "Evaluating...",
+    "endDateError": "End date must be after or equal to start date."
+  },
+  "activityOptions": {
+    "business_meeting": "Business meetings only",
+    "installation": "Installation / maintenance / service work",
+    "training": "Training / workshops",
+    "mobile_only": "Mobile work only (home office)",
+    "other": "Other"
+  },
+  "roleOptions": {
+    "employee": "HYDAC employee",
+    "contractor": "Contractor",
+    "trainee": "Trainee",
+    "external": "External service provider"
+  },
+  "summary": {
+    "title": "Assessment summary",
+    "noData": "No assessment data available. Please start a new assessment.",
+    "basicInfo": "Basic information",
+    "decision": "Decision",
+    "disclaimerTitle": "Disclaimer",
+    "disclaimer": "This internal tool provides guidance based on the currently stored country matrix. It does not replace legal advice. In case of doubt, contact Corporate HR/Legal.",
+    "country": "Country",
+    "activityType": "Activity type",
+    "duration": "Duration",
+    "mobileOnly": "Mobile work only",
+    "travellerRole": "Traveller role",
+    "yes": "Yes",
+    "no": "No",
+    "notSpecified": "Not specified in matrix",
+    "documents": "Documents to carry",
+    "postStay": "Post-stay obligations",
+    "sanctions": "Sanctions",
+    "downloadPdf": "Download PDF",
+    "newAssessmentBtn": "New assessment"
+  },
+  "decisionBanner": {
+    "required": "Notification required",
+    "notRequired": "No notification required",
+    "unknown": "Decision unclear"
+  }
+  
+
+
+}

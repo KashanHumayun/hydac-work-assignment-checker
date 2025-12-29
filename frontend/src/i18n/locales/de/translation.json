@@ -1,0 +1,71 @@
+{
+  "app": {
+    "title": "HYDAC Entsende-Checker",
+    "subtitle": "EU-Meldepflicht Unterstützungstool",
+    "newAssessment": "Neue Bewertung",
+    "footer": "© 2025 HYDAC HR System. Alle Rechte vorbehalten."
+
+  },
+  "lang": {
+    "switchTo": "EN",
+    "title": "Switch to English",
+    "aria": "Sprache auf Englisch wechseln"
+  },
+  "newAssessment": {
+    "title": "Neue Entsendebewertung",
+    "intro": "Geben Sie die Basisdaten der geplanten Entsendung ein. Das System prüft die Ländermatrix und zeigt an, ob eine Meldung erforderlich ist.",
+    "country": "Einsatzland",
+    "selectCountry": "Land auswählen",
+    "activity": "Art der Tätigkeit",
+    "activityHint": "Wählen Sie die Option, die am besten zum Hauptzweck der Reise passt.",
+    "travellerRole": "Rolle der reisenden Person",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "durationHint": "Die Dauer wird automatisch aus den Daten berechnet.",
+    "mobileOnly": "100% mobile Arbeit (keine Präsenz beim Kunden oder HYDAC-Standort)",
+    "mobileHint": "Wenn aktiviert, wendet das System spezielle Regeln für mobile Arbeit aus der Matrix an.",
+    "durationCalculated": "Berechnete Dauer: {{days}} Tag(e)",
+    "evaluate": "Bewertung durchführen",
+    "evaluating": "Wird geprüft...",
+    "endDateError": "Das Enddatum muss nach dem Startdatum liegen oder gleich sein."
+  },
+  "activityOptions": {
+    "business_meeting": "Nur Geschäftstermine",
+    "installation": "Montage / Wartung / Service",
+    "training": "Schulungen / Workshops",
+    "mobile_only": "Nur mobile Arbeit (Homeoffice)",
+    "other": "Sonstiges"
+  },
+  "roleOptions": {
+    "employee": "HYDAC Mitarbeiter",
+    "contractor": "Auftragnehmer",
+    "trainee": "Praktikant",
+    "external": "Externer Dienstleister"
+  },
+  "summary": {
+    "title": "Ergebnisübersicht",
+    "noData": "Keine Bewertungsdaten verfügbar. Bitte starten Sie eine neue Bewertung.",
+    "basicInfo": "Basisinformationen",
+    "decision": "Entscheidung",
+    "disclaimerTitle": "Hinweis",
+    "disclaimer": "Dieses interne Tool liefert eine Orientierung auf Basis der aktuellen Ländermatrix. Es ersetzt keine Rechtsberatung. Im Zweifel Corporate HR/Legal kontaktieren.",
+    "country": "Land",
+    "activityType": "Tätigkeit",
+    "duration": "Dauer",
+    "mobileOnly": "Nur mobile Arbeit",
+    "travellerRole": "Rolle",
+    "yes": "Ja",
+    "no": "Nein",
+    "notSpecified": "Nicht in der Matrix angegeben",
+    "documents": "Mitführende Dokumente",
+    "postStay": "Pflichten nach Aufenthalt",
+    "sanctions": "Sanktionen",
+    "downloadPdf": "PDF herunterladen",
+    "newAssessmentBtn": "Neue Bewertung"
+  },
+  "decisionBanner": {
+    "required": "Meldung erforderlich",
+    "notRequired": "Keine Meldung erforderlich",
+    "unknown": "Entscheidung unklar"
+  }
+}
