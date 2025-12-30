@@ -137,29 +137,216 @@ HYDAC/
 
 ## 📖 Usage
 
-### Creating a New Assessment
-1. Navigate to the home page
-2. Select a country of work
-3. Choose the type of activity
-4. Specify traveller role and dates
-5. Check "Mobile only" if applicable
-6. Click "Evaluate assignment"
-7. View results and download PDF if needed
+### 🏠 Main Navigation Bar
 
-### Managing Rules
-1. Go to **Rules upload** (admin page)
-2. View current active and latest rule versions
-3. Select a CSV file with the new country matrix
-4. Click "Upload rules"
-5. System validates the CSV and activates it if valid
-6. If validation fails, previous rules remain active
+The top navigation bar has 3 buttons:
 
-### CSV Format Requirements
-- Delimiter: Semicolon (`;`)
-- First row: Country headers (columns 3+)
-- First column: Category names
-- Second column: Subcategory names (optional)
-- Remaining cells: Values for each country-category combination
+1. **New assessment** - Create a new work assignment evaluation
+2. **Rules upload** - Admin page to manage country matrix rules (always blue)
+3. **EN/DE Toggle** - Switch between English and German languages
+
+---
+
+### 📋 Creating a New Assessment
+
+#### **Step 1: Select Country**
+- Click the "Country of work" dropdown
+- Choose the country where the assignment will take place
+- The system uses the country matrix to determine requirements
+
+#### **Step 2: Choose Activity Type**
+- **Business meetings only** - Short-term meetings with no on-site work
+- **Installation / maintenance / service work** - Technical work at customer site
+- **Training / workshops** - Educational activities
+- **Mobile work only (home office)** - 100% remote work
+- **Other** - Any other type of activity
+
+#### **Step 3: Select Traveller Role**
+- **HYDAC employee** - Direct employee
+- **Contractor** - External contractor/partner
+- **Trainee** - Intern or trainee
+- **External service provider** - Third-party vendor
+
+#### **Step 4: Enter Dates**
+- **Start date** - When the assignment begins
+- **End date** - When the assignment ends
+- The system automatically calculates duration in days
+
+#### **Step 5: Check Mobile Work (Optional)**
+- Toggle "100% mobile work" if the person works entirely remotely
+- The system applies special rules for pure mobile work
+
+#### **Step 6: Click "Evaluate assignment"**
+- The button shows "Evaluating..." while processing
+- System checks the country matrix for this combination
+
+---
+
+### ✅ View Results / Assessment Summary
+
+After evaluation, you'll see:
+
+#### **Decision Banner** (Top of summary)
+- 🟢 **Notification required** - Red banner, notification must be filed
+- 🟢 **No notification required** - Green banner, no action needed
+- ⚪ **Decision unclear** - Gray banner, matrix doesn't specify
+
+#### **Basic Information Section**
+Shows a summary of your inputs:
+- Country
+- Activity type
+- Traveller role
+- Duration (calculated in days)
+- Mobile work status
+
+#### **Decision Details Section**
+Displays findings from the country matrix:
+- **Documents to carry** - Required documents for the assignment
+- **Post-stay obligations** - Actions required after the assignment ends
+- **Sanctions** - Potential penalties if not compliant
+
+#### **Buttons**
+- **Download PDF** - Save results as a PDF file for records
+- **New assessment** - Start another assessment
+
+---
+
+### 📤 Rules Upload (Admin)
+
+#### **Overview Section**
+Shows current state:
+- **Active version** - Currently active rules (e.g., v1)
+- **Latest version** - Most recent uploaded version
+
+#### **Upload File**
+1. Click the file input box
+2. Select a `.csv` file from your computer
+3. The button enables once a file is selected
+
+#### **Upload Button**
+- Click to upload the rules file
+- Shows "Uploading..." while processing
+- Maximum file size: 6MB
+
+#### **Success Message** (Green banner)
+- Shows: "Rules v2 uploaded successfully! (45 countries)"
+- File is immediately active
+- System validates before activation
+
+#### **Error Message** (Red banner)
+- Shows validation error (e.g., "Missing required columns")
+- Falls back to previous version automatically
+- Previous rules remain in use - no downtime
+
+#### **Hint**
+- Upload semicolon-delimited CSV
+- Include all countries and categories
+- Required format: See CSV section below
+
+---
+
+## 📊 CSV Format for Rules Upload
+
+The country matrix CSV must follow this format:
+
+```
+;Category;;Germany;France;Italy;Spain
+;Subcategory 1;Value 1;Value 2;Value 3;Value 4
+Meldepflicht;Yes;Yes;No;No
+;No;No;Yes;Yes
+Travel Documents;Visa;Visa;Passport;Passport
+;Duration;1-7 days;1-7 days;8+ days;8+ days
+```
+
+**Structure**:
+- **Row 1**: Headers with country names (columns 3+)
+- **Column 1**: Main category (e.g., "Meldepflicht")
+- **Column 2**: Subcategory (optional, leave empty for main values)
+- **Columns 3+**: Values for each country
+
+**Example Valid CSV**:
+```csv
+;;Germany;France;Spain
+Notification Required;Yes;Yes;No
+;No;Yes;No
+Travel Documents;Visa;Passport;ID
+;Duration;Up to 7 days;Up to 30 days;Unlimited
+Sanctions;Fine 500€;Fine 1000€;None
+```
+
+---
+
+## 🎨 Features Breakdown
+
+| Feature | Location | Purpose |
+|---------|----------|---------|
+| **Country Selection** | Home page, top field | Choose work destination |
+| **Activity Dropdown** | Home page, second field | Select work type |
+| **Role Selection** | Home page, third field | Identify worker type |
+| **Date Pickers** | Home page, date fields | Set assignment duration |
+| **Mobile Checkbox** | Home page, bottom | Mark 100% remote work |
+| **Evaluate Button** | Home page, main button | Run the assessment |
+| **Summary View** | Results page, full screen | Display findings |
+| **PDF Download** | Results page, bottom | Export as PDF |
+| **Rules Upload** | Admin page, file input | Load new matrices |
+| **Version Info** | Admin page, top | Check current state |
+| **Language Toggle** | Nav bar, top right | Switch EN/DE |
+
+---
+
+## 🔄 Workflow Examples
+
+### Example 1: German Employee on Business Trip to France
+1. Country: **France**
+2. Activity: **Business meetings only**
+3. Role: **HYDAC employee**
+4. Duration: **3 days** (Jan 15-17)
+5. Mobile: **No**
+
+**Expected Result**: 
+- ✅ Check French rules for 3-day business trips
+- May require notification if >1 day
+- May need visa depending on rules
+
+### Example 2: Contractor Doing Installation in Spain
+1. Country: **Spain**
+2. Activity: **Installation / maintenance / service work**
+3. Role: **Contractor**
+4. Duration: **10 days** (Jan 1-10)
+5. Mobile: **No**
+
+**Expected Result**:
+- ✅ Check Spain's rules for installation work
+- Different rules apply for contractors
+- Longer duration = higher compliance requirements
+
+### Example 3: Remote Home Office from Germany
+1. Country: **Any** (not applicable)
+2. Activity: **Mobile work only**
+3. Role: **HYDAC employee**
+4. Duration: **30 days**
+5. Mobile: **Yes**
+
+**Expected Result**:
+- ✅ Check home country rules (Germany)
+- Pure remote work often exempt from notification
+- Documents: Home office equipment list
+
+---
+
+## 🖼️ Adding Screenshots
+
+To enhance documentation with screenshots, add images to `docs/images/` folder:
+
+1. **Home Page** - Assessment form (docs/images/home-page.png)
+2. **Summary Page** - Results view (docs/images/summary-page.png)
+3. **Rules Admin** - CSV upload (docs/images/rules-admin.png)
+4. **Mobile View** - Responsive design (docs/images/mobile-view.png)
+
+Then reference in README with:
+```markdown
+![Home Page](docs/images/home-page.png)
+```
 
 ## 🌍 Internationalization
 
