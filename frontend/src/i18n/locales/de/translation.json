@@ -3,6 +3,7 @@
     "title": "HYDAC Entsende-Checker",
     "subtitle": "EU-Meldepflicht Unterstützungstool",
     "newAssessment": "Neue Bewertung",
+    "rulesAdmin": "Regeln hochladen",
     "footer": "© 2025 HYDAC HR System. Alle Rechte vorbehalten."
 
   },
@@ -67,5 +68,19 @@
     "required": "Meldung erforderlich",
     "notRequired": "Keine Meldung erforderlich",
     "unknown": "Entscheidung unklar"
+  },
+  "rulesUpload": {
+    "title": "Regeln hochladen (Ländermatrix)",
+    "loading": "Aktive Regeln werden geladen...",
+    "activeInfo": "Aktiv: v{{active}} | Aktuell: v{{latest}}",
+    "noActiveInfo": "Keine aktiven Regeln geladen.",
+    "noFile": "Bitte wählen Sie eine CSV-Datei aus.",
+    "onlyCsv": "Nur .csv-Dateien sind zulässig.",
+    "uploadBtn": "Regeln hochladen",
+    "uploading": "Wird hochgeladen...",
+    "hint": "Laden Sie eine durch Semikolons getrennte CSV-Datei mit der Ländermatrix hoch.",
+    "success": "Regeln v{{version}} erfolgreich hochgeladen! ({{countries}} Länder)",
+    "failed": "Hochladen der Regeln fehlgeschlagen.",
+    "fallbackNote": "Das System verwendet weiterhin die vorherigen aktiven Regeln."
   }
 }

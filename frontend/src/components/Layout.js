@@ -65,6 +65,17 @@ export default function Layout({ children }) {
           >
             {t("app.newAssessment")}
           </Link>
+
+          <Link
+            to="/admin/rules"
+            className={
+              location.pathname === "/admin/rules"
+                ? "nav-link btn btn-primary"
+                : "nav-link btn btn-outline"
+            }
+          >
+            {t("app.rulesAdmin")}
+          </Link>
         </nav>
       </header>
 

@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const countryRoutes = require('./routes/countryRoutes');
 const evaluationRoutes = require('./routes/evaluationRoutes');
+const rulesRoutes = require('./routes/rulesRoutes');
 const logger = require('./utils/logger');
 
 const app = express();
@@ -25,6 +26,7 @@ app.get('/health', (req, res) => {
 // Routes (prefix with /api)
 app.use('/api/countries', countryRoutes);
 app.use('/api/evaluate', evaluationRoutes);
+app.use('/api/rules', rulesRoutes);
 
 // Global error handler
 // eslint-disable-next-line no-unused-vars

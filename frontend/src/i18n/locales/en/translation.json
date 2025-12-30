@@ -3,6 +3,7 @@
     "title": "HYDAC Work Assignment Checker",
     "subtitle": "EU employment notification support tool",
     "newAssessment": "New assessment",
+    "rulesAdmin": "Rules upload",
     "footer": "© 2025 HYDAC HR System. All rights reserved."
 
   },
@@ -67,6 +68,20 @@
     "required": "Notification required",
     "notRequired": "No notification required",
     "unknown": "Decision unclear"
+  },
+  "rulesUpload": {
+    "title": "Upload rules (country matrix)",
+    "loading": "Loading active rules...",
+    "activeInfo": "Active: v{{active}} | Latest: v{{latest}}",
+    "noActiveInfo": "No active rules loaded.",
+    "noFile": "Please select a CSV file.",
+    "onlyCsv": "Only .csv files are allowed.",
+    "uploadBtn": "Upload rules",
+    "uploading": "Uploading...",
+    "hint": "Upload a semicolon-delimited CSV file with the country matrix.",
+    "success": "Rules v{{version}} uploaded successfully! ({{countries}} countries)",
+    "failed": "Rules upload failed.",
+    "fallbackNote": "The system continues using the previous active rules."
   }
   
 
