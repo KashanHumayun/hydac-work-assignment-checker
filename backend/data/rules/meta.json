@@ -1,7 +1,23 @@
 {
-  "activeVersion": 3,
-  "latestVersion": 3,
+  "activeVersion": 5,
+  "latestVersion": 5,
   "history": [
+    {
+      "version": 5,
+      "filename": "v5.csv",
+      "uploadedAt": "2026-01-12T10:11:39.099Z",
+      "originalName": "LÃ¤ndermatrix_EU-Meldungen_Stand_10-2025(HauptÃ¼bersicht) (6).csv",
+      "mimeType": "text/csv",
+      "countriesCount": 31
+    },
+    {
+      "version": 4,
+      "filename": "v4.csv",
+      "uploadedAt": "2026-01-12T09:43:09.116Z",
+      "originalName": "LÃ¤ndermatrix_EU-Meldungen_Stand_10-2025(HauptÃ¼bersicht) (5).csv",
+      "mimeType": "text/csv",
+      "countriesCount": 31
+    },
     {
       "version": 3,
       "filename": "v3.csv",

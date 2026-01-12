@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - hydac_rules:/app/backend/data/rules
+    environment:
+      - PORT=4000
+      - NODE_ENV=production
+      - CORS_ORIGIN=* # Update this in production
+
+volumes:
+  hydac_rules:
