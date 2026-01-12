@@ -18,7 +18,7 @@ app.use(
   })
 );
 
-// Simple health check
+// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
@@ -27,6 +27,18 @@ app.get('/health', (req, res) => {
 app.use('/api/countries', countryRoutes);
 app.use('/api/evaluate', evaluationRoutes);
 app.use('/api/rules', rulesRoutes);
+
+// Static files and Client-side Routing (placed after API routes)
+const path = require('path');
+const publicPath = path.join(__dirname, '../public');
+
+// Serve static files (always check this folder if it exists)
+app.use(express.static(publicPath));
+
+// Catch-all route to serve React's index.html for any non-API request
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 // Global error handler
 // eslint-disable-next-line no-unused-vars
