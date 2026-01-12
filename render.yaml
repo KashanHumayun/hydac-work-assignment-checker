@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: hydac-checker
+    runtime: docker
+    repo: https://github.com/KashanHumayun/hydac-work-assignment-checker # Change if needed
+    plan: free
+    region: frankfurt
+    envVars:
+      - key: PORT
+        value: "4000"
+      - key: NODE_ENV
+        value: "production"
+      - key: CORS_ORIGIN
+        value: "*"
+    # For persistence (requires a paid plan):
+    # disk:
+    #   name: hydac-data
+    #   mountPath: /app/backend/data/rules
+    #   sizeGB: 1
