@@ -147,7 +147,7 @@ export default function SummaryPage() {
 
   async function handleDownloadPdf() {
     try {
-      const response = await fetch("http://localhost:4000/api/evaluate/export-pdf", {
+      const response = await fetch("/api/evaluate/export-pdf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ country, input, result })
