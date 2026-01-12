@@ -30,14 +30,24 @@ app.use('/api/rules', rulesRoutes);
 
 // Static files and Client-side Routing (placed after API routes)
 const path = require('path');
+const fs = require('fs');
 const publicPath = path.join(__dirname, '../public');
+const indexPath = path.join(publicPath, 'index.html');
+
+logger.info(`Static files path: ${publicPath}`);
+logger.info(`Index.html exists: ${fs.existsSync(indexPath)}`);
 
 // Serve static files (always check this folder if it exists)
 app.use(express.static(publicPath));
 
 // Catch-all route to serve React's index.html for any non-API request
 app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    logger.error(`Catch-all hit but index.html missing at: ${indexPath}`);
+    res.status(404).send('Frontend not found. Please check build logs.');
+  }
 });
 
 // Global error handler
