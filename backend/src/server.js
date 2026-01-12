@@ -9,7 +9,7 @@ async function start() {
     // Load matrix into memory on startup
     await loadMatrix();
     app.listen(PORT, () => {
-      logger.info(`HYDAC backend running on port ${PORT} [Mode: ${process.env.NODE_ENV || 'development'}]`);
+      logger.info(`HYDAC backend running on port ${PORT}`);
     });
   } catch (err) {
     logger.error('Failed to start server:', err);
